@@ -52,20 +52,14 @@ public class MoviesApiClient {
                         String.format("Failed to fetch movies from page %d due to timeout or network error", page), ex));
     }
 
-    public boolean isApiHealthy() {
-        try {
-            return webClient
-                    .get()
-                    .uri("/api/movies/search?page={page}", 1)
-                    .exchangeToMono(response -> response.releaseBody()
-                            .thenReturn(response.statusCode().is2xxSuccessful()))
-                    .timeout(Duration.ofSeconds(5))
-                    .onErrorReturn(false)
-                    .blockOptional()
-                    .orElse(false);
-        } catch (Exception ex) {
-            return false;
-        }
+    public Mono<Boolean> isApiHealthy() {
+        return webClient
+                .get()
+                .uri("/api/movies/search?page={page}", 1)
+                .exchangeToMono(response -> response.releaseBody()
+                        .thenReturn(response.statusCode().is2xxSuccessful()))
+                .timeout(Duration.ofSeconds(5))
+                .onErrorReturn(false);
     }
 }
 

@@ -34,13 +34,15 @@ public class DirectorsController {
     public Mono<DirectorsResponse> getDirectorsAboveThreshold(
             @RequestParam("threshold") @NotNull @Min(value = 0, message = "Threshold must be a non-negative integer") Integer threshold) {
 
-        if (!moviesApiClient.isApiHealthy()) {
-            throw new ResponseStatusException(
-                    HttpStatus.SERVICE_UNAVAILABLE,
-                    "The movies service is currently unavailable. Please try again later.");
-        }
-
-        return directorsService.getDirectorsAboveThreshold(threshold);
+        return moviesApiClient.isApiHealthy()
+                .flatMap(isHealthy -> {
+                    if (!isHealthy) {
+                        return Mono.error(new ResponseStatusException(
+                                HttpStatus.SERVICE_UNAVAILABLE,
+                                "The movies service is currently unavailable. Please try again later."));
+                    }
+                    return directorsService.getDirectorsAboveThreshold(threshold);
+                });
     }
 }
 

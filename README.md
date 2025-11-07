@@ -1,10 +1,10 @@
-# 🎬 Eron Directors Service
+# Movie Directors Service
 
 Spring Boot microservice that aggregates a paginated movies catalog and surfaces directors whose filmography exceeds a configurable threshold.
 
 ---
 
-## ✨ Feature Highlights
+## Feature Highlights
 
 - Aggregates movies across all pages of `https://wiremock.dev.eroninternational.com/api/movies/search`
 - Counts movies per director and returns those strictly above the requested threshold
@@ -12,7 +12,7 @@ Spring Boot microservice that aggregates a paginated movies catalog and surfaces
 - Fetches pages concurrently with configurable parallelism for low latency
 - Provides structured error responses and graceful degradation
 
-## 💪 Bonus Features Implemented
+## Bonus Features Implemented
 
 - **Resilience:** Configurable timeouts, retries with exponential backoff, and circuit-breaker friendly design
 - **Health Check:** Fail-fast availability probe that verifies the external Movies API before serving requests
@@ -21,7 +21,7 @@ Spring Boot microservice that aggregates a paginated movies catalog and surfaces
 - **Code Quality:** Layered architecture, DTO separation, and integration-ready configuration via `application.properties`
 - **Testing:** Unit tests for aggregation logic and service-level edge cases (run with `mvn test`)
 
-## 🧭 Architecture Overview
+## Architecture Overview
 
 ```
 Client → REST Controller → Directors Service → Movies API Client → External Movies API
@@ -31,7 +31,7 @@ Client → REST Controller → Directors Service → Movies API Client → Exter
 - **Service layer (`DirectorsService`)** orchestrates pagination, aggregation, and threshold filtering
 - **Client layer (`MoviesApiClient`)** handles reactive HTTP calls and pagination metadata
 
-## 🧰 Technology Stack
+## Technology Stack
 
 - Spring Boot 3.5.7 + Spring WebFlux (WebClient)
 - Project Reactor for reactive, non-blocking flows
@@ -39,7 +39,7 @@ Client → REST Controller → Directors Service → Movies API Client → Exter
 - Maven for build/test lifecycle
 - Java 17+ runtime (21 recommended)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/main/java/com/example/eron_directors_service/
@@ -51,7 +51,7 @@ src/main/java/com/example/eron_directors_service/
 └── model/                  # Domain entities
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 Configure external dependencies in `src/main/resources/application.properties`:
 
@@ -64,7 +64,7 @@ movies.api.max-concurrency=8    # Aligns with PAGE_FETCH_CONCURRENCY in the serv
 
 Environment overrides can be supplied via JVM system properties or environment variables (e.g., `MOVIES_API_BASE_URL`).
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Java 17 or higher (Java 21 recommended)
@@ -92,7 +92,7 @@ java -jar target/eron-directors-service-0.0.1-SNAPSHOT.jar
 
 The service listens on `http://localhost:8080` by default.
 
-## 🔌 API Reference
+## API Reference
 
 ### GET `/api/directors`
 
@@ -121,21 +121,21 @@ curl "http://localhost:8080/api/directors?threshold=5"
 - `503 Service Unavailable` – Downstream API unreachable or timed out
 - `500 Internal Server Error` – Unexpected server condition
 
-## 🔒 Resilience & Edge Cases
+##  Resilience & Edge Cases
 
 - Skips blank or null director names during aggregation
 - Applies 30s timeout with retries for transient upstream failures
 - Returns empty list when no directors exceed the threshold
 - Logs structured errors for observability and troubleshooting
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 ```bash
 mvn test
 ```
 
-## 🔭 Future Enhancements
+## Future Enhancements
 
 - **Performance:** Adaptive concurrency & caching of recent pages
 - **Monitoring:** Micrometer metrics, distributed tracing, and health indicators
