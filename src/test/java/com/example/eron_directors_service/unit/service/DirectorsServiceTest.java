@@ -50,7 +50,7 @@ class DirectorsServiceTest {
         when(moviesApiClient.fetchMoviesPage(1))
                 .thenReturn(Mono.just(page1));
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1L))
                 .expectNext(DirectorsResponse.of(List.of("Martin Scorsese", "Woody Allen")))
                 .verifyComplete();
 
@@ -80,7 +80,7 @@ class DirectorsServiceTest {
         when(moviesApiClient.fetchMoviesPage(2))
                 .thenReturn(Mono.just(page2));
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(2))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(2L))
                 .expectNext(DirectorsResponse.of(List.of("Martin Scorsese")))
                 .verifyComplete();
 
@@ -106,7 +106,7 @@ class DirectorsServiceTest {
         when(moviesApiClient.fetchMoviesPage(1))
                 .thenReturn(Mono.just(page1));
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1L))
                 .expectNext(DirectorsResponse.of(List.of("Martin Scorsese", "Woody Allen")))
                 .verifyComplete();
     }
@@ -124,7 +124,7 @@ class DirectorsServiceTest {
         when(moviesApiClient.fetchMoviesPage(1))
                 .thenReturn(Mono.just(page1));
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(10))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(10L))
                 .expectNext(DirectorsResponse.of(List.of()))
                 .verifyComplete();
     }
@@ -146,7 +146,7 @@ class DirectorsServiceTest {
         when(moviesApiClient.fetchMoviesPage(1))
                 .thenReturn(Mono.just(page1));
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1L))
                 .expectNext(DirectorsResponse.of(List.of("Martin Scorsese", "Woody Allen", "Zack Snyder")))
                 .verifyComplete();
     }
@@ -156,7 +156,7 @@ class DirectorsServiceTest {
         when(moviesApiClient.fetchMoviesPage(1))
                 .thenReturn(Mono.error(new RuntimeException("API unavailable")));
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1L))
                 .expectNext(DirectorsResponse.of(List.of()))
                 .verifyComplete();
 
@@ -175,7 +175,7 @@ class DirectorsServiceTest {
 
         when(moviesApiClient.fetchMoviesPage(1)).thenReturn(Mono.just(page));
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(2))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(2L))
                 .expectNext(DirectorsResponse.of(List.of()))
                 .verifyComplete();
     }
@@ -195,7 +195,7 @@ class DirectorsServiceTest {
         when(moviesApiClient.fetchMoviesPage(2)).thenReturn(secondPagePublisher.mono());
         when(moviesApiClient.fetchMoviesPage(3)).thenReturn(thirdPagePublisher.mono());
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(0))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(0L))
                 .then(() -> thirdPagePublisher.emit(thirdPage))
                 .then(() -> secondPagePublisher.error(new RuntimeException("Page 2 failure")))
                 .expectNext(DirectorsResponse.of(List.of("Director Alpha", "Director Omega")))
@@ -220,7 +220,7 @@ class DirectorsServiceTest {
             when(moviesApiClient.fetchMoviesPage(page)).thenReturn(Mono.just(response));
         }
 
-        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1200))
+        StepVerifier.create(directorsService.getDirectorsAboveThreshold(1200L))
                 .expectNext(DirectorsResponse.of(List.of("Director A", "Director B")))
                 .verifyComplete();
 

@@ -142,3 +142,5 @@ mvn test
 - **Features:** Filtering by year/genre, pagination on response, GraphQL endpoint
 - **Deployment:** Containerization with Docker, Helm charts, canary rollout strategy
 
+© 2025 Julián Szwarcman – Technical challenge for Eron International
+
