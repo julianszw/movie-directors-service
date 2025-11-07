@@ -4,6 +4,7 @@ import com.example.movie_directors_service.controller.DirectorsController;
 import com.example.movie_directors_service.dto.response.DirectorsResponse;
 import com.example.movie_directors_service.exception.GlobalExceptionHandler;
 import com.example.movie_directors_service.service.DirectorsService;
+import com.example.movie_directors_service.validation.ThresholdValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,10 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @WebFluxTest(controllers = DirectorsController.class)
-@Import(GlobalExceptionHandler.class)
+@Import({GlobalExceptionHandler.class, ThresholdValidator.class})
 class DirectorsControllerTest {
 
     @Autowired

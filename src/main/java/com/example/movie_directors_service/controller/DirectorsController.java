@@ -3,6 +3,7 @@ package com.example.movie_directors_service.controller;
 import com.example.movie_directors_service.dto.response.ErrorResponse;
 import com.example.movie_directors_service.exception.InvalidParameterException;
 import com.example.movie_directors_service.service.DirectorsService;
+import com.example.movie_directors_service.validation.ThresholdValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,11 @@ import java.time.OffsetDateTime;
 public class DirectorsController {
 
     private final DirectorsService directorsService;
+    private final ThresholdValidator thresholdValidator;
 
-    public DirectorsController(DirectorsService directorsService) {
+    public DirectorsController(DirectorsService directorsService, ThresholdValidator thresholdValidator) {
         this.directorsService = directorsService;
+        this.thresholdValidator = thresholdValidator;
     }
 
     @GetMapping
@@ -28,28 +31,12 @@ public class DirectorsController {
             @RequestParam("threshold") String thresholdParam) {
 
         try {
-            long threshold = parseAndValidateThreshold(thresholdParam);
+            long threshold = thresholdValidator.parseAndValidate(thresholdParam);
 
             return directorsService.getDirectorsAboveThreshold(threshold)
                     .map(directors -> ResponseEntity.ok().body((Object) directors));
         } catch (InvalidParameterException ex) {
             return Mono.just(ResponseEntity.badRequest().body(buildErrorResponse(ex.getMessage())));
-        }
-    }
-
-    private long parseAndValidateThreshold(String thresholdParam) {
-        if (thresholdParam == null || thresholdParam.trim().isEmpty()) {
-            throw new InvalidParameterException("Parameter 'threshold' cannot be empty or blank");
-        }
-
-        try {
-            long threshold = Long.parseLong(thresholdParam.trim());
-            if (threshold < 0) {
-                throw new InvalidParameterException("Threshold must be non-negative");
-            }
-            return threshold;
-        } catch (NumberFormatException e) {
-            throw new InvalidParameterException("Invalid value for parameter 'threshold': '" + thresholdParam + "' must be a valid number", e);
         }
     }
 
