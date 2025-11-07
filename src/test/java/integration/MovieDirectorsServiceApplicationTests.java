@@ -105,10 +105,6 @@ class MovieDirectorsServiceApplicationTests {
 					return Mono.just(singlePage);
 				}
 
-				@Override
-				public Mono<Boolean> isApiHealthy() {
-					return Mono.just(true);
-				}
 			};
 		}
 	}
