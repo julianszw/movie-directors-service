@@ -1,9 +1,9 @@
-package com.example.eron_directors_service.service;
+package com.example.movie_directors_service.service;
 
-import com.example.eron_directors_service.client.MoviesApiClient;
-import com.example.eron_directors_service.dto.response.DirectorsResponse;
-import com.example.eron_directors_service.dto.response.MoviesPageResponse;
-import com.example.eron_directors_service.model.Movie;
+import com.example.movie_directors_service.client.MoviesApiClient;
+import com.example.movie_directors_service.dto.response.DirectorsResponse;
+import com.example.movie_directors_service.dto.response.MoviesPageResponse;
+import com.example.movie_directors_service.model.Movie;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

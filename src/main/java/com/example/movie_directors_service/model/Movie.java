@@ -1,4 +1,4 @@
-package com.example.eron_directors_service.model;
+package com.example.movie_directors_service.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

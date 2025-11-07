@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>eron-directors-service</artifactId>
+	<artifactId>movie-directors-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eron-directors-service</name>
-	<description>Demo project for Spring Boot</description>
+	<name>movie-directors-service</name>
+	<description>Movie directors lookup service built with Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>

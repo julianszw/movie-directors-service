@@ -1,6 +1,6 @@
-package com.example.eron_directors_service.exception;
+package com.example.movie_directors_service.exception;
 
-import com.example.eron_directors_service.dto.response.ErrorResponse;
+import com.example.movie_directors_service.dto.response.ErrorResponse;
 import jakarta.validation.ConstraintViolationException;
 import java.time.OffsetDateTime;
 import java.util.Objects;

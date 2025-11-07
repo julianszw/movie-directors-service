@@ -1,4 +1,4 @@
-package com.example.eron_directors_service.exception;
+package com.example.movie_directors_service.exception;
 
 public class ExternalApiException extends RuntimeException {
     

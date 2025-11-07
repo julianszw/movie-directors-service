@@ -1,11 +1,11 @@
 package integration;
 
-import com.example.eron_directors_service.MovieDirectorsServiceApplication;
-import com.example.eron_directors_service.client.MoviesApiClient;
-import com.example.eron_directors_service.controller.DirectorsController;
-import com.example.eron_directors_service.dto.response.MoviesPageResponse;
-import com.example.eron_directors_service.model.Movie;
-import com.example.eron_directors_service.service.DirectorsService;
+import com.example.movie_directors_service.MovieDirectorsServiceApplication;
+import com.example.movie_directors_service.client.MoviesApiClient;
+import com.example.movie_directors_service.controller.DirectorsController;
+import com.example.movie_directors_service.dto.response.MoviesPageResponse;
+import com.example.movie_directors_service.model.Movie;
+import com.example.movie_directors_service.service.DirectorsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;

@@ -1,7 +1,7 @@
-package com.example.eron_directors_service.controller;
+package com.example.movie_directors_service.controller;
 
-import com.example.eron_directors_service.dto.response.DirectorsResponse;
-import com.example.eron_directors_service.service.DirectorsService;
+import com.example.movie_directors_service.dto.response.DirectorsResponse;
+import com.example.movie_directors_service.service.DirectorsService;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;

@@ -1,6 +1,6 @@
-package com.example.eron_directors_service.service;
+package com.example.movie_directors_service.service;
 
-import com.example.eron_directors_service.dto.response.DirectorsResponse;
+import com.example.movie_directors_service.dto.response.DirectorsResponse;
 import reactor.core.publisher.Mono;
 
 /**

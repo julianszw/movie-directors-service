@@ -42,7 +42,7 @@ Client → REST Controller → Directors Service → Movies API Client → Exter
 ## Project Structure
 
 ```
-src/main/java/com/example/eron_directors_service/
+src/main/java/com/example/movie_directors_service/
 ├── controller/             # REST endpoints
 ├── service/                # Business logic and aggregation
 ├── client/                 # External API integration
@@ -87,7 +87,7 @@ mvn spring-boot:run
 ### Build & Run JAR
 ```bash
 mvn clean package
-java -jar target/eron-directors-service-0.0.1-SNAPSHOT.jar
+java -jar target/movie-directors-service-0.0.1-SNAPSHOT.jar
 ```
 
 The service listens on `http://localhost:8080` by default.

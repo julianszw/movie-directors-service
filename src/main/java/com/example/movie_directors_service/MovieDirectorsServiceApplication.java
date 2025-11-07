@@ -1,4 +1,4 @@
-package com.example.eron_directors_service;
+package com.example.movie_directors_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

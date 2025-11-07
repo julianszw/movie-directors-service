@@ -1,11 +1,11 @@
-package com.example.eron_directors_service.unit.service;
+package com.example.movie_directors_service.unit.service;
 
-import com.example.eron_directors_service.client.MoviesApiClient;
-import com.example.eron_directors_service.dto.response.DirectorsResponse;
-import com.example.eron_directors_service.dto.response.MoviesPageResponse;
-import com.example.eron_directors_service.model.Movie;
-import com.example.eron_directors_service.service.DirectorsService;
-import com.example.eron_directors_service.service.DirectorsServiceImpl;
+import com.example.movie_directors_service.client.MoviesApiClient;
+import com.example.movie_directors_service.dto.response.DirectorsResponse;
+import com.example.movie_directors_service.dto.response.MoviesPageResponse;
+import com.example.movie_directors_service.model.Movie;
+import com.example.movie_directors_service.service.DirectorsService;
+import com.example.movie_directors_service.service.DirectorsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

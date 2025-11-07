@@ -1,6 +1,6 @@
-package com.example.eron_directors_service.dto.response;
+package com.example.movie_directors_service.dto.response;
 
-import com.example.eron_directors_service.model.Movie;
+import com.example.movie_directors_service.model.Movie;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,7 +1,7 @@
-package com.example.eron_directors_service.client;
+package com.example.movie_directors_service.client;
 
-import com.example.eron_directors_service.dto.response.MoviesPageResponse;
-import com.example.eron_directors_service.exception.ExternalApiException;
+import com.example.movie_directors_service.dto.response.MoviesPageResponse;
+import com.example.movie_directors_service.exception.ExternalApiException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

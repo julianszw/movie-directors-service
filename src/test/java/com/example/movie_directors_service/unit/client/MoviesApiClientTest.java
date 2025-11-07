@@ -1,9 +1,9 @@
-package com.example.eron_directors_service.unit.client;
+package com.example.movie_directors_service.unit.client;
 
-import com.example.eron_directors_service.client.MoviesApiClient;
-import com.example.eron_directors_service.dto.response.MoviesPageResponse;
-import com.example.eron_directors_service.exception.ExternalApiException;
-import com.example.eron_directors_service.model.Movie;
+import com.example.movie_directors_service.client.MoviesApiClient;
+import com.example.movie_directors_service.dto.response.MoviesPageResponse;
+import com.example.movie_directors_service.exception.ExternalApiException;
+import com.example.movie_directors_service.model.Movie;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

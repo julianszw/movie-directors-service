@@ -1,9 +1,9 @@
-package com.example.eron_directors_service.unit.controller;
+package com.example.movie_directors_service.unit.controller;
 
-import com.example.eron_directors_service.controller.DirectorsController;
-import com.example.eron_directors_service.dto.response.DirectorsResponse;
-import com.example.eron_directors_service.exception.GlobalExceptionHandler;
-import com.example.eron_directors_service.service.DirectorsService;
+import com.example.movie_directors_service.controller.DirectorsController;
+import com.example.movie_directors_service.dto.response.DirectorsResponse;
+import com.example.movie_directors_service.exception.GlobalExceptionHandler;
+import com.example.movie_directors_service.service.DirectorsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
