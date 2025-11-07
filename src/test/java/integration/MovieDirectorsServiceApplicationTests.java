@@ -1,4 +1,4 @@
-package com.example.eron_directors_service;
+package integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

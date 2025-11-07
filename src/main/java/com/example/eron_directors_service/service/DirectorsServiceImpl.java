@@ -24,7 +24,7 @@ public class DirectorsServiceImpl implements DirectorsService {
     }
 
     @Override
-    public Mono<DirectorsResponse> getDirectorsAboveThreshold(int threshold) {
+    public Mono<DirectorsResponse> getDirectorsAboveThreshold(Long threshold) {
         return fetchAllMoviePages()
                 .flatMapIterable(MoviesPageResponse::getData)
                 .filter(Movie::hasValidDirector)

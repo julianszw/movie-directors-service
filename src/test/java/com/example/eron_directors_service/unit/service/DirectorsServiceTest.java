@@ -1,4 +1,4 @@
-package com.example.eron_directors_service;
+package com.example.eron_directors_service.unit.service;
 
 import com.example.eron_directors_service.client.MoviesApiClient;
 import com.example.eron_directors_service.dto.response.DirectorsResponse;

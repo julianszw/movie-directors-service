@@ -1,5 +1,6 @@
-package com.example.eron_directors_service.client;
+package com.example.eron_directors_service.unit.client;
 
+import com.example.eron_directors_service.client.MoviesApiClient;
 import com.example.eron_directors_service.dto.response.MoviesPageResponse;
 import com.example.eron_directors_service.exception.ExternalApiException;
 import com.example.eron_directors_service.model.Movie;

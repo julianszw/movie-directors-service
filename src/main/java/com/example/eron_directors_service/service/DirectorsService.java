@@ -14,6 +14,6 @@ public interface DirectorsService {
      * @param threshold threshold to evaluate directors against (must be non-negative)
      * @return reactive stream of alphabetically sorted director names
      */
-    Mono<DirectorsResponse> getDirectorsAboveThreshold(int threshold);
+    Mono<DirectorsResponse> getDirectorsAboveThreshold(Long threshold);
 }
 
