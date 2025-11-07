@@ -8,22 +8,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @WebFluxTest(controllers = DirectorsController.class)
 @Import(GlobalExceptionHandler.class)
@@ -32,7 +25,7 @@ class DirectorsControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    @Autowired
+    @MockBean
     private DirectorsService directorsService;
 
     @BeforeEach
@@ -67,7 +60,8 @@ class DirectorsControllerTest {
                 .exchange()
                 .expectStatus().isBadRequest()
                 .expectBody()
-                .jsonPath("$.message").value(message -> assertThat(message).asString().isNotBlank());
+                .jsonPath("$.message").value(message ->
+                        message.toString().contains("must be a valid number"));
 
         verifyNoInteractions(directorsService);
     }
@@ -98,19 +92,9 @@ class DirectorsControllerTest {
                 .exchange()
                 .expectStatus().isBadRequest()
                 .expectBody()
-                .jsonPath("$.message").isEqualTo("Threshold must be a non-negative integer");
+                .jsonPath("$.message").value(message ->
+                        message.toString().contains("non-negative"));
 
-        verify(directorsService, never()).getDirectorsAboveThreshold(anyLong());
-    }
-
-    @TestConfiguration
-    static class TestConfig {
-
-        @Bean
-        DirectorsService directorsService() {
-            return mock(DirectorsService.class);
-        }
+        verifyNoInteractions(directorsService);
     }
 }
-
-

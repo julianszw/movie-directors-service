@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/**
- * WebFlux-backed service that keeps the entire processing pipeline non-blocking to sustain
- * throughput in high-volume environments.
- */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 public class DirectorsServiceImpl implements DirectorsService {
-
-    private static final int PAGE_FETCH_CONCURRENCY = 8;
 
     private final MoviesApiClient moviesApiClient;
 
@@ -25,32 +24,58 @@ public class DirectorsServiceImpl implements DirectorsService {
 
     @Override
     public Mono<DirectorsResponse> getDirectorsAboveThreshold(Long threshold) {
-        return fetchAllMoviePages()
-                .flatMapIterable(MoviesPageResponse::getData)
-                .filter(Movie::hasValidDirector)
-                .groupBy(Movie::getDirector)
-                .flatMap(group -> group.count()
-                        .filter(count -> count > threshold)
-                        .map(count -> group.key()))
-                .sort()
-                .collectList()
-                .map(directors -> DirectorsResponse.builder()
-                        .directors(directors)
-                        .build());
+        return fetchAllMovies()
+                .map(movies -> {
+                    Map<String, Long> directorCounts = countMoviesByDirector(movies);
+                    List<String> filteredDirectors = filterDirectorsAboveThreshold(directorCounts, threshold);
+                    return DirectorsResponse.of(filteredDirectors);
+                });
     }
 
-    private Flux<MoviesPageResponse> fetchAllMoviePages() {
+    private Mono<List<Movie>> fetchAllMovies() {
         return moviesApiClient.fetchMoviesPage(1)
-                .flatMapMany(firstPage -> {
-                    int totalPages = Math.max(firstPage.getTotalPages(), 1);
+                .flatMap(firstPage -> {
+                    int totalPages = firstPage.getTotalPages();
+                    List<Movie> allMovies = new ArrayList<>(firstPage.getData() != null ? firstPage.getData() : List.of());
 
-                    return Flux.range(1, totalPages)
-                            .flatMap(page -> page == 1
-                                            ? Mono.just(firstPage)
-                                            : moviesApiClient.fetchMoviesPage(page)
-                                                    .onErrorResume(error -> Mono.empty()),
-                                    PAGE_FETCH_CONCURRENCY);
+                    if (totalPages <= 1) {
+                        return Mono.just(allMovies);
+                    }
+
+                    Flux<MoviesPageResponse> remainingPages = Flux.range(2, totalPages - 1)
+                            .flatMap(page -> moviesApiClient.fetchMoviesPage(page)
+                                            .onErrorResume(e -> Mono.empty()),  // ← SOLO ESTA LÍNEA NUEVA
+                                    5);
+
+                    return remainingPages
+                            .map(MoviesPageResponse::getData)
+                            .collectList()
+                            .map(pageDataList -> {
+                                for (List<Movie> pageData : pageDataList) {
+                                    if (pageData != null) {
+                                        allMovies.addAll(pageData);
+                                    }
+                                }
+                                return allMovies;
+                            });
                 })
-                .onErrorResume(error -> Flux.empty());
+                .onErrorReturn(List.of());
+    }
+
+    private Map<String, Long> countMoviesByDirector(List<Movie> movies) {
+        return movies.stream()
+                .filter(Movie::hasValidDirector)
+                .collect(Collectors.groupingBy(
+                        Movie::getDirector,
+                        Collectors.counting()
+                ));
+    }
+
+    private List<String> filterDirectorsAboveThreshold(Map<String, Long> directorCounts, Long threshold) {
+        return directorCounts.entrySet().stream()
+                .filter(entry -> entry.getValue() > threshold)
+                .map(Map.Entry::getKey)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

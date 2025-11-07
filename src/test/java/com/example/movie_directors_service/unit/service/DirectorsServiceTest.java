@@ -41,7 +41,7 @@ class DirectorsServiceTest {
         Movie movie2 = createMovieWithDirector("Woody Allen");
         Movie movie3 = createMovieWithDirector("Martin Scorsese");
         Movie movie4 = createMovieWithDirector("Woody Allen");
-        
+
         MoviesPageResponse page1 = createMoviesPageResponse(
                 Arrays.asList(movie1, movie2, movie3, movie4),
                 1,
@@ -61,7 +61,7 @@ class DirectorsServiceTest {
     void testGetDirectorsAboveThreshold_MultiplePages() {
         Movie movie1 = createMovieWithDirector("Martin Scorsese");
         Movie movie2 = createMovieWithDirector("Woody Allen");
-        
+
         MoviesPageResponse page1 = createMoviesPageResponse(
                 Arrays.asList(movie1, movie2),
                 1,
@@ -69,7 +69,7 @@ class DirectorsServiceTest {
 
         Movie movie3 = createMovieWithDirector("Martin Scorsese");
         Movie movie4 = createMovieWithDirector("Martin Scorsese");
-        
+
         MoviesPageResponse page2 = createMoviesPageResponse(
                 Arrays.asList(movie3, movie4),
                 2,
@@ -97,7 +97,7 @@ class DirectorsServiceTest {
         Movie movie5 = createMovieWithDirector("Woody Allen");
         Movie movie6 = createMovieWithDirector("Woody Allen");
         Movie movie7 = createMovieWithDirector("Martin Scorsese");
-        
+
         MoviesPageResponse page1 = createMoviesPageResponse(
                 Arrays.asList(movie1, movie2, movie3, movie4, movie5, movie6, movie7),
                 1,
@@ -115,7 +115,7 @@ class DirectorsServiceTest {
     void testGetDirectorsAboveThreshold_NoDirectorsAboveThreshold() {
         Movie movie1 = createMovieWithDirector("Director A");
         Movie movie2 = createMovieWithDirector("Director B");
-        
+
         MoviesPageResponse page1 = createMoviesPageResponse(
                 Arrays.asList(movie1, movie2),
                 1,
@@ -137,7 +137,7 @@ class DirectorsServiceTest {
         Movie movie4 = createMovieWithDirector("Zack Snyder");
         Movie movie5 = createMovieWithDirector("Martin Scorsese");
         Movie movie6 = createMovieWithDirector("Woody Allen");
-        
+
         MoviesPageResponse page1 = createMoviesPageResponse(
                 Arrays.asList(movie1, movie2, movie3, movie4, movie5, movie6),
                 1,
@@ -256,4 +256,3 @@ class DirectorsServiceTest {
                 .build();
     }
 }
-
