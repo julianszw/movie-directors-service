@@ -43,12 +43,25 @@ Client → REST Controller → Directors Service → Movies API Client → Exter
 
 ```
 src/main/java/com/example/movie_directors_service/
-├── controller/             # REST endpoints
+├── MovieDirectorsServiceApplication.java
+├── controller/             # REST endpoints (WebFlux)
+│   └── DirectorsController.java
 ├── service/                # Business logic and aggregation
+│   ├── DirectorsService.java
+│   └── DirectorsServiceImpl.java
 ├── client/                 # External API integration
+│   └── MoviesApiClient.java
 ├── dto/                    # Request/response contracts
+│   └── response/
+│       ├── DirectorsResponse.java
+│       ├── ErrorResponse.java
+│       └── MoviesPageResponse.java
 ├── exception/              # Custom exceptions and error models
+│   ├── ExternalApiException.java
+│   ├── GlobalExceptionHandler.java
+│   └── InvalidParameterException.java
 └── model/                  # Domain entities
+    └── Movie.java
 ```
 
 ## Configuration
